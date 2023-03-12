@@ -38,9 +38,11 @@ CustomerDao custDao;
 
 	@Override
 	public Customer getCustomer(long id) {
-		Optional<Customer> opt=custDao.findById(id);
+		//Optional<Customer> opt=custDao.findById(id);
 		
-		return opt.get();
+	
+		//	return opt.get();
+		return custDao.getCustomerbycid(id);
 	}
 
 	@Override
@@ -50,7 +52,7 @@ CustomerDao custDao;
 	}
 
 	@Override
-	public Customer findByEmail(String email) {
+	public Optional<Customer> findByEmail(String email) {
 		// TODO Auto-generated method stub
 		return custDao.findByEmail(email);
 	}

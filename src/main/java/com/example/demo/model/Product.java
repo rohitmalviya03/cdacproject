@@ -5,37 +5,44 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 	public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String category;
+	
 	private String name;
 	private String description;
 	private int price;
+
+	
+
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	 private byte[] image;
 
-	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+    private Category category;
 
 	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	public int getPrice() {
@@ -81,6 +88,7 @@ import jakarta.persistence.Lob;
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 	
 

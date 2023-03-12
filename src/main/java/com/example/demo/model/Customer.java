@@ -1,10 +1,14 @@
 package com.example.demo.model;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
     @Entity
@@ -102,6 +106,25 @@ import jakarta.persistence.Table;
 
 	    @Column(name = "password")
 	    private String password;
+	    
+//	    @OneToMany(mappedBy="customer")
+//	    private Set <CartItem> cartitems;
+//	    
+	    
+		@Override
+		public String toString() {
+			return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+					+ ", phoneNumber=" + phoneNumber + ", country=" + country + ", city=" + city + ", pincode="
+					+ pincode + ", password=" + password +"]";
+		}
+
+//		public Set<CartItem> getCartitems() {
+//			return cartitems;
+//		}
+//
+//		public void setCartitems(Set<CartItem> cartitems) {
+//			this.cartitems = cartitems;
+//		}
 
 		public String getPassword() {
 			return password;

@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.model.Customer;
 public interface CustomerService {
 	
@@ -9,5 +11,5 @@ public interface CustomerService {
 	public int update(Customer student);
 	public Customer getCustomer(long id);
 	public List<Customer> fetchAll();
-	public Customer findByEmail(String email);
+	public Optional<Customer> findByEmail(String email);
 }

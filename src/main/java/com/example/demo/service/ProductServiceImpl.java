@@ -5,11 +5,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.ProductDao;
+import com.example.demo.model.Category;
+import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 
 @Service
@@ -21,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public Product saveProduct(MultipartFile file, String name,String description
-			,int price,String category,long seller_id) {
+			,int price,Category category,long seller_id) {
 		// TODO Auto-generated method stub
 		
 
@@ -60,9 +63,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product getProducts(long id) {
+	public Optional<Product> getProducts(long id) {
 		// TODO Auto-generated method stub
-		return null;
+return productDao.findById(id);
+		
+		
 	}
 
 	@Override
@@ -89,6 +94,12 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> prod =productDao.findAll();
 		int count=prod.size();
 		return count;
+	}
+
+	@Override
+	public List<Product> findProductById(long id) {
+		// TODO Auto-generated method stub
+		return productDao.findAllById(id);
 	}
 
 	

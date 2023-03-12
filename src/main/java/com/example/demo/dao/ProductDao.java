@@ -12,4 +12,5 @@ import com.example.demo.model.Product;
 public interface ProductDao  extends  JpaRepository<Product, Long>, CrudRepository<Product, Long>{
 public List<Product> findByPrice(int price);
 public List<Product> findByCategory(String category);
+public List<Product> findAllById(long id);
 }
