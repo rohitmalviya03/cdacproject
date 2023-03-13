@@ -9,6 +9,7 @@ import com.example.demo.service.AuthResponse;
 import com.example.demo.service.CartService;
 import com.example.demo.service.CustomerService;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.SellerService;
 import com.example.demo.service.categoryServie;
 import com.example.demo.service.orderService;
 
@@ -37,13 +38,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.Product;
+import com.example.demo.model.Seller;
 import com.example.demo.model.orders;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("api/users")
 public class HomeController {
-	
+	@Autowired
+	SellerService sellerService;
 	@Autowired
 	CustomerService custService;
 	@Autowired
@@ -215,5 +218,30 @@ return prodService.getProducts(id);
 //	     cart.setCartid(cartId);
 	        return orderservice.getorderList(custid);
 	 }
-	 
+
+	    
+	    //seller module
+	    
+	    @RequestMapping("/sellerregistration")
+		public String   Sregistration(@RequestBody 	Seller seller)
+		
+		{   
+	    	System.out.println("ada"+seller);
+	    	sellerService.saveSellerr(seller);  
+			return "save seller";
+		}
+	    
+	    @PostMapping("/authenticateseller")
+	    public ResponseEntity<AuthResponse> login( @RequestBody Seller seller) {
+		  Optional<Seller> existingUser = sellerService.findByEmail(seller.getEmail());
+		  
+		  Seller user=existingUser.get();
+	        if (existingUser != null && user.getPassword().equals(seller.getPassword())) {
+	        	return ResponseEntity.ok(new AuthResponse(user.getId(), user.getFirstName()));
+	        } else {
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	        }
+		
+	
+	  }
 }
